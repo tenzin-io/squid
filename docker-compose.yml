@@ -5,7 +5,6 @@ services:
     image: repo.tenzin.io/tlhakhan/app/squid:latest
     ports:
       - "3128:3128"
-    entrypoint: /usr/sbin/squid --foreground
     volumes:
       - ./squid_config:/etc/squid
       - squid_cache:/var/spool/squid
