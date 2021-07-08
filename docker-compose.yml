@@ -3,6 +3,7 @@ version: '2'
 services:
   squid:
     image: repo.tenzin.io/tlhakhan/app/squid:latest
+    restart_policy: always
     ports:
       - "3128:3128"
     volumes:
