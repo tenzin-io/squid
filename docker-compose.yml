@@ -3,12 +3,21 @@ version: '2'
 services:
   squid:
     image: repo.tenzin.io/tlhakhan/app/squid:latest
-    restart_policy: always
+    restart: always
     ports:
       - "3128:3128"
     volumes:
       - ./squid_config:/etc/squid
       - squid_cache:/var/spool/squid
+      - squid_logs:/var/log/squid
+
+  squid_logs:
+    image: repo.tenzin.io/tlhakhan/os/ubuntu:20.04
+    restart: always
+    volumes:
+      - squid_logs:/logs
+    entrypoint: tail -F /logs/access.log /logs/cache.log /logs/cache_store.log
 
 volumes:
   squid_cache:
+  squid_logs:
