@@ -1,4 +1,4 @@
-FROM ubuntu:20.04                                    
+FROM arm64v8/ubuntu:20.04                                    
 
 ENV TERM=xterm
 
@@ -11,10 +11,6 @@ COPY files/packages /packages
 RUN apt-get update && \
     xargs -t -a /packages apt-get install -y && \
     apt-get clean
-
-# add internal CA certificate
-COPY files/internal-ca.crt /usr/local/share/ca-certificates/internal-ca/internal-ca.crt                                                                              
-RUN update-ca-certificates
 
 # send over sudoers file for proxy user
 COPY files/proxy /etc/sudoers.d/proxy
